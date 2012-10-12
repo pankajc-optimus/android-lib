@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.optimus.mobile.oauth.facebook" >
+
+    <uses-sdk android:minSdkVersion="5" />
+
+    <application />
+
+</manifest>
