@@ -53,10 +53,7 @@
             android:name=".LibSMSReceiver"
             android:enabled="true" >
             <intent-filter>
-                <action android:name="android.intent.action.DATA_SMS_RECEIVED" />
-
-                <data android:scheme="sms" />
-                <data android:port="15555" />
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
     </application>

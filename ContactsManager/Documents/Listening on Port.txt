@@ -1,0 +1,3 @@
+To listen SMS on port. 
+1.Simply add a <data port: portno> to your receiver attributes in AndroidManifest.xml. 
+2.Only data SMS could be retrieved on port. So do uncomment the data SMS send call in "sendSMS" method of LibSMSutils class to send data SMS instead of simple text messages.

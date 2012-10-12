@@ -5,9 +5,11 @@
  */
 package com.optimus.atul.librarysms;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
 import android.app.PendingIntent;
 import android.content.ContentResolver;
 import android.content.ContentUris;
@@ -18,16 +20,17 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.CallLog;
-import android.provider.ContactsContract.Contacts;
-import android.provider.ContactsContract.Data;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
+import android.provider.ContactsContract.Contacts;
+import android.provider.ContactsContract.Data;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.util.SparseArray;
 
 /**
  * This library provides various APIs which could be utilized for integrating
- * SMS and MMS functionality in an Android application.
+ * SMS,CallLogs,Contacts functionality in an Android application.
  * 
  */
 public class LibSMSUtils {
@@ -41,8 +44,17 @@ public class LibSMSUtils {
 	 * @return Boolean indicating the presence of such service.
 	 */
 	public boolean checkSMSServiceAvailability(Context argContext) {
-		ConnectivityManager connMgr = (ConnectivityManager) argContext
-				.getSystemService(Context.CONNECTIVITY_SERVICE);
+		ConnectivityManager connMgr = null;
+
+		try {
+			connMgr = (ConnectivityManager) argContext
+					.getSystemService(Context.CONNECTIVITY_SERVICE);
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (connMgr == null)
+				throw new IllegalArgumentException();
+		}
 
 		// Obtain network information of type MOBILE.
 		NetworkInfo networkInfo = connMgr
@@ -114,67 +126,37 @@ public class LibSMSUtils {
 	 *            sentIntent is NULL the caller will be checked against all
 	 *            unknown applications, which cause smaller number of SMS to be
 	 *            sent in checking period.
+	 * @throws Exception
 	 */
-	public void sendSMS(Context argContext,String message, String recipient, Intent pendingIntent)
-			throws IllegalArgumentException {
-//		String SENT = "SMS_SENT";
-//		String DELIVERED = "SMS_DELIVERED";
+	public void sendSMS(Context argContext, String message, String recipient,
+			Intent pendingIntent) throws Exception {
 		SmsManager sms = SmsManager.getDefault();
-//		// ---when the SMS has been sent---
-//		argContext.registerReceiver(new BroadcastReceiver() {
-//			@Override
-//			public void onReceive(Context arg0, Intent arg1) {
-//				switch (getResultCode()) {
-//				case Activity.RESULT_OK:
-//					Toast.makeText(context, "SMS sent", Toast.LENGTH_SHORT)
-//							.show();
-//					break;
-//				case SmsManager.RESULT_ERROR_GENERIC_FAILURE:
-//					Toast.makeText(context, "Generic failure",
-//							Toast.LENGTH_SHORT).show();
-//					break;
-//				case SmsManager.RESULT_ERROR_NO_SERVICE:
-//					Toast.makeText(context, "No service", Toast.LENGTH_SHORT)
-//							.show();
-//					break;
-//				case SmsManager.RESULT_ERROR_NULL_PDU:
-//					Toast.makeText(context, "Null PDU", Toast.LENGTH_SHORT)
-//							.show();
-//					break;
-//				case SmsManager.RESULT_ERROR_RADIO_OFF:
-//					Toast.makeText(context, "Radio off", Toast.LENGTH_SHORT)
-//							.show();
-//					break;
-//				}
-//			}
-//		}, new IntentFilter(SENT));
-//
-//		// ---when the SMS has been delivered---
-//		context.registerReceiver(new BroadcastReceiver() {
-//			@Override
-//			public void onReceive(Context arg0, Intent arg1) {
-//				switch (getResultCode()) {
-//				case Activity.RESULT_OK:
-//					Toast.makeText(context, "SMS delivered", Toast.LENGTH_SHORT)
-//							.show();
-//					break;
-//				case Activity.RESULT_CANCELED:
-//					Toast.makeText(context, "SMS not delivered",
-//							Toast.LENGTH_SHORT).show();
-//					break;
-//				}
-//			}
-//		}, new IntentFilter(DELIVERED));
+
+		if (!checkSMSServiceAvailability(argContext)) {
+			Exception ex = new Exception("Service not available");
+			throw ex;
+		}
+		if (message == null || recipient == null)
+			throw new IllegalArgumentException();
 
 		// Sending SMS
 		if (pendingIntent != null) {
-			sms.sendTextMessage(recipient, null, message,
-					PendingIntent.getBroadcast(context, 0, pendingIntent, 0),
-					null);
+			try {
+				sms.sendTextMessage(recipient, null, message, PendingIntent
+						.getBroadcast(context, 0, pendingIntent, 0), null);
+			} catch (Exception e) {
+				throw e;
+			}
 
 		} else {
-//			sms.sendTextMessage(recipient, null, message, null, null);
-			sms.sendDataMessage(recipient, null, (short) 15554, message.getBytes(), null, null);
+			try {
+				sms.sendTextMessage(recipient, null, message, null, null);
+			} catch (Exception e) {
+				throw e;
+			}
+			// For sending data sms.
+			// sms.sendDataMessage(recipient, null, (short) 15554,
+			// message.getBytes(), null, null);
 		}
 
 	}
@@ -184,22 +166,41 @@ public class LibSMSUtils {
 	 * handles MMS functionality. This method however launches the Android own
 	 * Messaging Application with the desired images/text/recipient attached.
 	 * 
+	 * 
+	 * @param argContext
+	 *            Context of the activity calling this function.
 	 * @param imageUri
-	 *            The android.net.Uri of the image to be attached with the MMS.
+	 *            The android.net.Uri of the image to be attached with the
+	 *            MMS.Pass null for no image attachment.
 	 * @param messageText
-	 *            The text part to be attached to the MMS.
+	 *            The text part to be attached to the MMS. Pass null for no text
+	 *            attachment.
 	 * @param recipient
-	 *            The destination phone number.
+	 *            The destination phone number.Pass null for no recipient
+	 *            address attachment.
 	 */
-	public void sendMMSPicture(Uri imageUri, String messageText,
-			String recipient) {
-		Intent mmsIntent = new Intent(Intent.ACTION_SENDTO);
-		mmsIntent.setType("vnd.android-dir/mms-sms");
-		mmsIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
-		mmsIntent.putExtra("sms_body", messageText);
-		mmsIntent.putExtra("address", recipient);
-		mmsIntent.addCategory(Intent.CATEGORY_DEFAULT);
-		context.startActivity(mmsIntent);
+	public void sendMMSPicture(Context argContext, Uri imageUri,
+			String messageText, String recipient) {
+
+		if (argContext == null) {
+			throw new IllegalArgumentException();
+		}
+
+		try {
+			Intent mmsIntent = new Intent(Intent.ACTION_SENDTO);
+			mmsIntent.setType("vnd.android-dir/mms-sms");
+			if (imageUri != null)
+				mmsIntent.putExtra(Intent.EXTRA_STREAM, imageUri);
+			if (messageText != null)
+				mmsIntent.putExtra("sms_body", messageText);
+			if (recipient != null)
+				mmsIntent.putExtra("address", recipient);
+			mmsIntent.addCategory(Intent.CATEGORY_DEFAULT);
+			argContext.startActivity(mmsIntent);
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		}
+
 	}
 
 	/**
@@ -215,9 +216,21 @@ public class LibSMSUtils {
 	 */
 	public int deleteConversation(Context argContext, String argAddress) {
 
-		int i = argContext.getContentResolver().delete(
-				Uri.parse("content://sms/"), "address=?",
-				new String[] { argAddress });
+		if (argAddress == null)
+			throw new IllegalArgumentException();
+
+		int i = 0;
+		try {
+			i = argContext.getContentResolver().delete(
+					Uri.parse("content://sms/"), "address=?",
+					new String[] { argAddress });
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (i == 0)
+				throw new IllegalArgumentException();
+		}
+
 		Log.d("Number of Rows Deleted", "" + i);
 		return i;
 
@@ -245,44 +258,57 @@ public class LibSMSUtils {
 		 * Query the Android content resolver and retrieve the list of all
 		 * SMS/MMS conversations.
 		 */
-		ContentResolver contentResolver = argContext.getContentResolver();
-		final String[] projection = new String[] { "*" };
-		Uri uri = Uri.parse("content://mms-sms/conversations/");
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null)
+				throw new IllegalArgumentException();
+		}
+		final String[] projection = new String[] { "address", "thread_id" };
+		Uri uri = Uri.parse("content://sms");
 		Cursor query = contentResolver.query(uri, projection, null, null, null);
 
+//		HashMap<Integer, String> threads = new HashMap<Integer, String>();
+		SparseArray<String> threads= new SparseArray<String>();
 		/*
 		 * Begin an iteration and extract information from the returned query
 		 * result.
 		 */
 		if (query.moveToFirst()) {
 			do {
-
-				int columnIndex = query.getColumnIndexOrThrow("body");
-				String lastMessage = query.getString(columnIndex);
-				Log.i("Body", "" + lastMessage);
-
-				columnIndex = query.getColumnIndexOrThrow("address");
+				int columnIndex = query.getColumnIndexOrThrow("address");
 				String address = query.getString(columnIndex);
 				Log.i("Subject", "" + address);
 
 				columnIndex = query.getColumnIndexOrThrow("thread_id");
 				String conversationId = query.getString(columnIndex);
 				Log.i("Address", "" + conversationId);
-
-				JSONObject localObject = new JSONObject();
-				// Put the details fetched into a JSONObject --> JSONArray
-				try {
-					localObject.put("lasttext", lastMessage);
-					localObject.put("address", address);
-					localObject.put("thread_id", conversationId);
-
-					// Inserting the local JSONObject into the to-be-returned
-					// JSONArray.
-					obj.put(localObject);
-				} catch (JSONException e) {
-					Log.e("Exception:: ", "" + e.getMessage());
-				}
+				int threadid = Integer.parseInt(conversationId);
+//				if (!threads.containsKey(conversationId))
+					threads.put(threadid, address);
 			} while (query.moveToNext());
+		}
+	
+		
+		// Put the details fetched into a JSONObject --> JSONArray
+		try {
+			int k = 1;
+			String val;
+			while ((val=threads.get(k)) != null) {
+				JSONObject localObject = new JSONObject();
+				localObject.put("address", val);
+				localObject.put("thread_id", Integer.toString(k));
+			
+				// Inserting the local JSONObject into the to-be-returned
+				// JSONArray.
+				obj.put(localObject);
+				k++;
+			}
+		} catch (JSONException e) {
+			Log.e("Exception:: ", "" + e.getMessage());
 		}
 		// Return the result obtained.
 		return obj;
@@ -312,7 +338,20 @@ public class LibSMSUtils {
 		 * Query the Android content resolver and retrieve the list of all SMS
 		 * in a conversations.
 		 */
-		ContentResolver contentResolver = argContext.getContentResolver();
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null || conversationId == null)
+				throw new IllegalArgumentException();
+		}
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		}
 		final String[] projection = new String[] { "_id", "thread_id",
 				"address", "person", "date", "body", "type" };
 		Uri uri = Uri.parse("content://sms");
@@ -394,7 +433,15 @@ public class LibSMSUtils {
 		 * Query the Android content resolver and retrieve the list of all SMS
 		 * in a conversations.
 		 */
-		ContentResolver contentResolver = argContext.getContentResolver();
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null || argAddress == null)
+				throw new IllegalArgumentException();
+		}
 		final String[] projection = new String[] { "_id", "thread_id",
 				"address", "person", "date", "body", "type" };
 		Uri uri = Uri.parse("content://sms");
@@ -469,7 +516,15 @@ public class LibSMSUtils {
 		 * Query the Android content resolver and delete the message with the
 		 * corresponding message id.
 		 */
-		ContentResolver contentResolver = argContext.getContentResolver();
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null || argMessageId == null)
+				throw new IllegalArgumentException();
+		}
 		Uri uri = Uri.parse("content://sms");
 		int i = contentResolver.delete(uri, "_id=?",
 				new String[] { argMessageId });
@@ -504,7 +559,15 @@ public class LibSMSUtils {
 		 * Query the Android content resolver and retrieve the list of all SMS
 		 * in a conversations.
 		 */
-		ContentResolver contentResolver = argContext.getContentResolver();
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null)
+				throw new IllegalArgumentException();
+		}
 		final String[] projection = new String[] { "_id", "thread_id",
 				"address", "date", "body", "read", "status" };
 		Uri uri = Uri.parse("content://sms");
@@ -592,7 +655,23 @@ public class LibSMSUtils {
 		 * Query the Android content resolver and get the specific fields
 		 * related to contacts.
 		 */
-		ContentResolver contentResolver = argContext.getContentResolver();
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null)
+				throw new IllegalArgumentException();
+		}
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null)
+				throw new IllegalArgumentException();
+		}
 
 		// For contact name,phone,etc.
 		Cursor query = contentResolver.query(Data.CONTENT_URI, new String[] {
@@ -667,7 +746,15 @@ public class LibSMSUtils {
 	 */
 	private String getcontactEmail(Context argContext, String displayName) {
 		String emailId = null;
-		ContentResolver contentResolver = argContext.getContentResolver();
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null)
+				throw new IllegalArgumentException();
+		}
 		Cursor c = contentResolver.query(Data.CONTENT_URI, new String[] {
 				Phone.DISPLAY_NAME, Email.DATA1 }, Phone.DISPLAY_NAME + "=?"
 				+ " AND " + Data.MIMETYPE + "='" + Email.CONTENT_ITEM_TYPE
@@ -740,14 +827,27 @@ public class LibSMSUtils {
 		 * Query the Android content resolver and retrieve the list of all SMS
 		 * in a conversations.
 		 */
-		ContentResolver contentResolver = argContext.getContentResolver();
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null || timeStamp == null)
+				throw new IllegalArgumentException();
+		}
 		final String[] projection = new String[] { "_id", "thread_id",
 				"address", "date", "body", "read", "status" };
+
 		Uri uri = Uri.parse("content://sms");
 
-		Cursor query = contentResolver.query(uri, projection, "date>?",
-				new String[] { timeStamp }, null);
-
+		Cursor query = null;
+		try {
+			query = contentResolver.query(uri, projection, "date>?",
+					new String[] { timeStamp }, null);
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		}
 		String[] str = query.getColumnNames();
 		for (String s : str) {
 			Log.d("ColumnName:: ", s);
@@ -823,7 +923,15 @@ public class LibSMSUtils {
 		// Creating a new JSONArray for storing the result.
 		JSONArray obj = new JSONArray();
 
-		ContentResolver contentResolver = argContext.getContentResolver();
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException();
+		} finally {
+			if (contentResolver == null)
+				throw new IllegalArgumentException();
+		}
 
 		String[] projection = { CallLog.Calls.CACHED_NAME,
 				CallLog.Calls.CACHED_NUMBER_TYPE, CallLog.Calls.DATE,
@@ -837,8 +945,10 @@ public class LibSMSUtils {
 			query = contentResolver.query(CallLog.Calls.CONTENT_URI,
 					projection, null, null, null);
 		} else {
+
 			query = contentResolver.query(CallLog.Calls.CONTENT_URI,
 					projection, "number=?", new String[] { phoneNumber }, null);
+
 		}
 		String[] columnNames = query.getColumnNames();
 		for (String str : columnNames) {
