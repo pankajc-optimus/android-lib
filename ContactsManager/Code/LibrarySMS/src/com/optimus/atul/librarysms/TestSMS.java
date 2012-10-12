@@ -90,27 +90,27 @@ public class TestSMS extends Activity implements OnClickListener {
 
 			// smsUtils.deleteConversation(null, null);
 
-			// JSONArray jArray = smsUtils.getListOfConversations(TestSMS.this);
-			// Log.d("Json received:: ", jArray.toString());
+			 JSONArray jArray = smsUtils.getListOfConversations(TestSMS.this);
+			 Log.d("Json received:: ", jArray.toString());
 
-			// JSONArray jArray = smsUtils.getTextsfromAddress(TestSMS.this,
-			// "+919971193839");
-			// Log.d("Json received:: ", jArray.toString());
+//			 JSONArray jArray = smsUtils.getTextsfromId(TestSMS.this,
+//			 "2");
+//			 Log.d("Json received:: ", jArray.toString());
 
 			// boolean isDeleted = smsUtils.deleteSMS(TestSMS.this, "4");
 			// Log.d("IsDeleted", "" + isDeleted);
 
-			// JSONArray jArray = smsUtils.getUnreadMessages(TestSMS.this);
-			// Log.d("Json received:: ", jArray.toString());
+//			 JSONArray jArray = smsUtils.getUnreadMessages(TestSMS.this);
+//			 Log.d("Json received:: ", jArray.toString());
 
-			 JSONArray jArray = smsUtils.getContacts(this);
-			 Log.d("Json received:: ", jArray.toString());
-			 Log.d("Json length:: ",""+ jArray.length());
+//			 JSONArray jArray = smsUtils.getContacts(this);
+//			 Log.d("Json received:: ", jArray.toString());
+//			 Log.d("Json length:: ",""+ jArray.length());
 
-			// JSONArray jArray = smsUtils.getSMSLog(this, "1349882081589");
-			// Log.d("Json received:: ", jArray.toString());
+//			 JSONArray jArray = smsUtils.getSMSLog(this, "1349882081589");
+//			 Log.d("Json received:: ", jArray.toString());
 
-//			JSONArray jArray = smsUtils.getCallLog(this, "+917206175105");
+//			JSONArray jArray = smsUtils.getCallLog(this,null);
 //			Log.d("Json received:: ", jArray.toString());
 			break;
 		}

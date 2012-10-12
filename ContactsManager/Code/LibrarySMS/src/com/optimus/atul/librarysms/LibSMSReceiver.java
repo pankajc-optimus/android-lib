@@ -13,6 +13,11 @@ import android.provider.ContactsContract;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
 
+/**
+ * Extend this class to create a SMS Listener. Please add the implementer class attributes as a receiver in Android Manifest.
+ * @author Atul Mittal
+ *
+ */
 public abstract class LibSMSReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {

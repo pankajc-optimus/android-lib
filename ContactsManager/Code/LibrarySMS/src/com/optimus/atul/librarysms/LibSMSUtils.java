@@ -5,6 +5,7 @@
  */
 package com.optimus.atul.librarysms;
 
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,10 +26,11 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.telephony.SmsManager;
 import android.util.Log;
+import android.util.SparseArray;
 
 /**
  * This library provides various APIs which could be utilized for integrating
- * SMS and MMS functionality in an Android application.
+ * SMS,CallLogs,Contacts functionality in an Android application.
  * 
  */
 public class LibSMSUtils {
@@ -265,43 +267,48 @@ public class LibSMSUtils {
 			if (contentResolver == null)
 				throw new IllegalArgumentException();
 		}
-		final String[] projection = new String[] { "*" };
-		Uri uri = Uri.parse("content://mms-sms/conversations/");
+		final String[] projection = new String[] { "address", "thread_id" };
+		Uri uri = Uri.parse("content://sms");
 		Cursor query = contentResolver.query(uri, projection, null, null, null);
 
+//		HashMap<Integer, String> threads = new HashMap<Integer, String>();
+		SparseArray<String> threads= new SparseArray<String>();
 		/*
 		 * Begin an iteration and extract information from the returned query
 		 * result.
 		 */
 		if (query.moveToFirst()) {
 			do {
-
-				int columnIndex = query.getColumnIndexOrThrow("body");
-				String lastMessage = query.getString(columnIndex);
-				Log.i("Body", "" + lastMessage);
-
-				columnIndex = query.getColumnIndexOrThrow("address");
+				int columnIndex = query.getColumnIndexOrThrow("address");
 				String address = query.getString(columnIndex);
 				Log.i("Subject", "" + address);
 
 				columnIndex = query.getColumnIndexOrThrow("thread_id");
 				String conversationId = query.getString(columnIndex);
 				Log.i("Address", "" + conversationId);
-
-				JSONObject localObject = new JSONObject();
-				// Put the details fetched into a JSONObject --> JSONArray
-				try {
-					localObject.put("lasttext", lastMessage);
-					localObject.put("address", address);
-					localObject.put("thread_id", conversationId);
-
-					// Inserting the local JSONObject into the to-be-returned
-					// JSONArray.
-					obj.put(localObject);
-				} catch (JSONException e) {
-					Log.e("Exception:: ", "" + e.getMessage());
-				}
+				int threadid = Integer.parseInt(conversationId);
+//				if (!threads.containsKey(conversationId))
+					threads.put(threadid, address);
 			} while (query.moveToNext());
+		}
+	
+		
+		// Put the details fetched into a JSONObject --> JSONArray
+		try {
+			int k = 1;
+			String val;
+			while ((val=threads.get(k)) != null) {
+				JSONObject localObject = new JSONObject();
+				localObject.put("address", val);
+				localObject.put("thread_id", Integer.toString(k));
+			
+				// Inserting the local JSONObject into the to-be-returned
+				// JSONArray.
+				obj.put(localObject);
+				k++;
+			}
+		} catch (JSONException e) {
+			Log.e("Exception:: ", "" + e.getMessage());
 		}
 		// Return the result obtained.
 		return obj;
