@@ -13,7 +13,7 @@ import android.provider.ContactsContract;
 import android.telephony.SmsMessage;
 import android.widget.Toast;
 
-public class LibSMSReceiver extends BroadcastReceiver {
+public abstract class LibSMSReceiver extends BroadcastReceiver {
 	@Override
 	public void onReceive(Context context, Intent intent) {
 		Bundle extras = intent.getExtras();
@@ -44,13 +44,13 @@ public class LibSMSReceiver extends BroadcastReceiver {
 			}
 
 			Toast toast = Toast.makeText(context,
-					"Received SMS: " + message.getMessageBody(), Toast.LENGTH_LONG);
+					"Received SMSss: " + message.getMessageBody(), Toast.LENGTH_LONG);
 					toast.show();
-//			onSMSReceived(message, fromAddress, fromDisplayName);
+			onSMSReceived(message, fromAddress, fromDisplayName);
 			break;
 		}
 	}
 
-//	public abstract void onSMSReceived(SmsMessage message, String fromAddress,
-//			String fromDisplayName);
+	public abstract void onSMSReceived(SmsMessage message, String fromAddress,
+			String fromDisplayName);
 }

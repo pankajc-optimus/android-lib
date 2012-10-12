@@ -1,15 +1,8 @@
 package com.optimus.atul.librarysms;
 
-import java.net.URI;
-
 import org.json.JSONArray;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -28,7 +21,6 @@ public class TestSMS extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_lib_sms);
-		LibSMSReceiver as=new LibSMSReceiver();
 		// Initialize variables and references.
 		initVar();
 
@@ -42,13 +34,13 @@ public class TestSMS extends Activity implements OnClickListener {
 		}
 
 		// Calling check network service availability.(See log for output)
-//		if (smsUtils.checkMMSServiceAvailability(this)) {
-//			tvMMSAvail.setText(tvMMSAvail.getText()
-//					+ this.getString(R.string.labelAvailable));
-//		} else {
-//			tvMMSAvail.setText(tvMMSAvail.getText()
-//					+ this.getString(R.string.labelNotAvailable));
-//		}
+		// if (smsUtils.checkMMSServiceAvailability(this)) {
+		// tvMMSAvail.setText(tvMMSAvail.getText()
+		// + this.getString(R.string.labelAvailable));
+		// } else {
+		// tvMMSAvail.setText(tvMMSAvail.getText()
+		// + this.getString(R.string.labelNotAvailable));
+		// }
 
 	}
 
@@ -73,12 +65,17 @@ public class TestSMS extends Activity implements OnClickListener {
 		switch (v.getId()) {
 
 		case R.id.buttonGetContact:
-			
+
 			break;
 
 		case R.id.buttonSendSMS:
-			smsUtils.sendSMS(this,etMessage.getText().toString(), etPhone.getText()
-					.toString(), null);
+			try {
+				smsUtils.sendSMS(this, etMessage.getText().toString(), etPhone
+						.getText().toString(), null);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			break;
 
 		case R.id.buttonSelectPicture:
@@ -106,14 +103,15 @@ public class TestSMS extends Activity implements OnClickListener {
 			// JSONArray jArray = smsUtils.getUnreadMessages(TestSMS.this);
 			// Log.d("Json received:: ", jArray.toString());
 
-			// JSONArray jArray = smsUtils.getContacts(this);
+			 JSONArray jArray = smsUtils.getContacts(this);
+			 Log.d("Json received:: ", jArray.toString());
+			 Log.d("Json length:: ",""+ jArray.length());
+
+			// JSONArray jArray = smsUtils.getSMSLog(this, "1349882081589");
 			// Log.d("Json received:: ", jArray.toString());
 
-//			JSONArray jArray = smsUtils.getSMSLog(this, "1349882081589");
+//			JSONArray jArray = smsUtils.getCallLog(this, "+917206175105");
 //			Log.d("Json received:: ", jArray.toString());
-			
-			JSONArray jArray = smsUtils.getCallLog(this, "+917206175105");
-			Log.d("Json received:: ", jArray.toString());
 			break;
 		}
 
