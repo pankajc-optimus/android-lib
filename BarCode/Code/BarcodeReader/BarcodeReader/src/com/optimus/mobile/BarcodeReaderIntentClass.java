@@ -39,6 +39,15 @@ public class BarcodeReaderIntentClass {
 				DEFAULT_YES, DEFAULT_NO);
 	}
 
+	/**
+	 * Scans
+	 * @param activity
+	 * @param stringTitle
+	 * @param stringMessage
+	 * @param stringButtonYes
+	 * @param stringButtonNo
+	 * @return
+	 */
 	public static AlertDialog initiateScan(Activity activity, int stringTitle,
 			int stringMessage, int stringButtonYes, int stringButtonNo) {
 		return initiateScan(activity, activity.getString(stringTitle),
