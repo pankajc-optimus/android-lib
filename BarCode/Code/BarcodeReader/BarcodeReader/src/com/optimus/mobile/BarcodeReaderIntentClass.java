@@ -33,21 +33,28 @@ public class BarcodeReaderIntentClass {
 	private BarcodeReaderIntentClass() {
 
 	}
-
+    /**function name : initiateScan
+     * This function is called from the activity class 
+     * to start the process of scanning the barcode.
+     * current activity has to be passed as the parameter in the function.
+     * The function will result in display of the dialog box for
+     * downloading the barcode scanner application if it is not already installed,
+     * else it will start the process of scanning.
+     * @param activity
+     * @return
+     */
 	public static AlertDialog initiateScan(Activity activity) {
 		return initiateScan(activity, DEFAULT_TITLE, DEFAULT_MESSAGE,
 				DEFAULT_YES, DEFAULT_NO);
 	}
-
-	/**
-	 * Scans
-	 * @param activity
-	 * @param stringTitle
-	 * @param stringMessage
-	 * @param stringButtonYes
-	 * @param stringButtonNo
-	 * @return
-	 */
+    /**Function name : initiate Scan
+     * @param activity
+     * @param stringTitle
+     * @param stringMessage
+     * @param stringButtonYes
+     * @param stringButtonNo
+     * @return
+     */
 	public static AlertDialog initiateScan(Activity activity, int stringTitle,
 			int stringMessage, int stringButtonYes, int stringButtonNo) {
 		return initiateScan(activity, activity.getString(stringTitle),
@@ -55,6 +62,15 @@ public class BarcodeReaderIntentClass {
 				activity.getString(stringButtonYes),
 				activity.getString(stringButtonNo));
 	}
+	/**
+	 * Function name: initiateScan
+	 * @param activity
+	 * @param stringTitle
+	 * @param stringMessage
+	 * @param stringButtonYes
+	 * @param stringButtonNo
+	 * @return
+	 */
 
 	public static AlertDialog initiateScan(Activity activity,
 			CharSequence stringTitle, CharSequence stringMessage,
