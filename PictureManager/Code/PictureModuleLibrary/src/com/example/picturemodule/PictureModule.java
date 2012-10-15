@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.util.Log;
 
 // Java imports
 import java.io.File;
@@ -51,7 +52,7 @@ public class PictureModule extends Activity {
 			e.printStackTrace();
 			return null;
 		} catch (OutOfMemoryError e) {
-		    // Handling for outofmemory exception
+			// Handling for outofmemory exception
 			e.printStackTrace();
 			return null;
 		}
@@ -110,36 +111,43 @@ public class PictureModule extends Activity {
 			// Handling for nullpointer exception
 			e.printStackTrace();
 			return null;
-		} catch (NumberFormatException e){
-			// Handling for  numberformatexception
+		} catch (NumberFormatException e) {
+			// Handling for numberformatexception
 			e.printStackTrace();
 			return null;
-		} 
-		catch (OutOfMemoryError e) {
-			// Handling for outofmemory exception
-			File f = new File(filePath);
-
-			// In the case of outofmemory exception we need to scale down the
-			// image below 1mb.
-			Double fileSize = (double) f.length() / (double) 1048576;
-			if (fileSize > 1) {
-				// If the size of image is greater then 1mb set a particular
-				// scale value
-				// to scale down the image below 1mb
-				scale = (int) Math.ceil(fileSize);
-			} else {
-				scale = 1;
-			}
-
-			// Create and return scaled bitmap
-			BitmapFactory.Options o2 = new BitmapFactory.Options();
-			o2.inSampleSize = scale;
+		} catch (OutOfMemoryError e) {
 			try {
-				return BitmapFactory.decodeStream(
-						new FileInputStream(filePath), null, o2);
-			} catch (FileNotFoundException e1) {
-				// Handling for filenotfound exception
-				e1.printStackTrace();
+				// Handling for outofmemory exception
+				File f = new File(filePath);
+
+				// In the case of outofmemory exception we need to scale down
+				// the
+				// image below 1mb.
+				Double fileSize = (double) f.length() / (double) 1048576;
+				if (fileSize > 1) {
+					// If the size of image is greater then 1mb set a particular
+					// scale value
+					// to scale down the image below 1mb
+					scale = (int) Math.ceil(fileSize);
+				} else {
+					scale = 1;
+				}
+
+				// Create and return scaled bitmap
+				BitmapFactory.Options o2 = new BitmapFactory.Options();
+				o2.inSampleSize = scale;
+				try {
+					return BitmapFactory.decodeStream(new FileInputStream(
+							filePath), null, o2);
+				} catch (FileNotFoundException e1) {
+					// Handling for filenotfound exception
+					e1.printStackTrace();
+					return null;
+				}
+			} catch (OutOfMemoryError ex) {
+				ex.printStackTrace();
+				Log.i("Exception Message",
+						"Your device does not have free 1 MB native memory");
 				return null;
 			}
 		}
