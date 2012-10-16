@@ -15,8 +15,8 @@ import android.widget.Toast;
 
 /**
  * Extend this class to create a SMS Listener. Please add the implementer class
- * attributes as a receiver in Android Manifest with action: <action
- * android:name="android.provider.Telephony.SMS_RECEIVED" /> with permission to
+ * attributes as a receiver in Android Manifest with action: action
+ * android:name="android.provider.Telephony.SMS_RECEIVED"  with permission to
  * receive sms.
  * 
  * @author Atul Mittal
