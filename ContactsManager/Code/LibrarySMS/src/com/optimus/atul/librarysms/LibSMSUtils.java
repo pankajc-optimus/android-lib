@@ -5,6 +5,11 @@
  */
 package com.optimus.atul.librarysms;
 
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,7 +31,6 @@ import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
 import android.telephony.SmsManager;
 import android.util.Log;
-import android.util.SparseArray;
 
 /**
  * This library provides various APIs which could be utilized for integrating
@@ -34,9 +38,10 @@ import android.util.SparseArray;
  * 
  */
 public class LibSMSUtils {
-	Context context;
-	static final int PICK_CONTACT = 1919;
-	static LibContactUtil contactObj;
+
+	Context					context;
+	static final int		PICK_CONTACT	= 1919;
+	static LibContactUtil	contactObj;
 
 	/**
 	 * To check whether the device has access to SMS enabling services.
@@ -244,10 +249,9 @@ public class LibSMSUtils {
 	 * @param argsContext
 	 *            Context of the activity calling this function.
 	 * @return JSONArray which consists of JSONObjects.The fields represent
-	 *         ConversationThreadId,ConversationPartnerAddress and the LastText
-	 *         with key values "thread_id","address","lasttext" respectively.The
-	 *         presence of a key-value pair is subject to the availability of
-	 *         the value.
+	 *         ConversationThreadId and ConversationPartnerAddress with key
+	 *         values "thread_id" and "address" respectively.The presence of a
+	 *         key-value pair is subject to the availability of the value.
 	 */
 	public JSONArray getListOfConversations(Context argContext) {
 
@@ -271,8 +275,8 @@ public class LibSMSUtils {
 		Uri uri = Uri.parse("content://sms");
 		Cursor query = contentResolver.query(uri, projection, null, null, null);
 
-//		HashMap<Integer, String> threads = new HashMap<Integer, String>();
-		SparseArray<String> threads= new SparseArray<String>();
+		HashMap<Integer, String> threads = new HashMap<Integer, String>();
+		// SparseArray<String> threads = new SparseArray<String>();
 		/*
 		 * Begin an iteration and extract information from the returned query
 		 * result.
@@ -281,31 +285,32 @@ public class LibSMSUtils {
 			do {
 				int columnIndex = query.getColumnIndexOrThrow("address");
 				String address = query.getString(columnIndex);
-				Log.i("Subject", "" + address);
+				Log.i("address", "" + address);
 
 				columnIndex = query.getColumnIndexOrThrow("thread_id");
 				String conversationId = query.getString(columnIndex);
-				Log.i("Address", "" + conversationId);
+				Log.i("id", "" + conversationId + threads.size());
 				int threadid = Integer.parseInt(conversationId);
-//				if (!threads.containsKey(conversationId))
-					threads.put(threadid, address);
+				// if (!threads.containsKey(conversationId))
+				threads.put(threadid, address);
 			} while (query.moveToNext());
 		}
-	
-		
+
 		// Put the details fetched into a JSONObject --> JSONArray
 		try {
-			int k = 1;
-			String val;
-			while ((val=threads.get(k)) != null) {
+			Iterator<Entry<Integer, String>> iterator = threads.entrySet()
+					.iterator();
+
+			while (iterator.hasNext()) {
+				Map.Entry<Integer, String> pair = (Map.Entry<Integer, String>) iterator
+						.next();
 				JSONObject localObject = new JSONObject();
-				localObject.put("address", val);
-				localObject.put("thread_id", Integer.toString(k));
-			
+				localObject.put("address", pair.getValue());
+				localObject.put("thread_id", pair.getKey());
+
 				// Inserting the local JSONObject into the to-be-returned
 				// JSONArray.
 				obj.put(localObject);
-				k++;
 			}
 		} catch (JSONException e) {
 			Log.e("Exception:: ", "" + e.getMessage());
@@ -827,6 +832,12 @@ public class LibSMSUtils {
 		 * Query the Android content resolver and retrieve the list of all SMS
 		 * in a conversations.
 		 */
+
+		// Creating timestamp object
+//		Timestamp tStamp = new Timestamp(Long.parseLong(timeStamp));
+//		String genericTimeStamp = tStamp.
+//		Log.i("TimeStamp::", genericTimeStamp);
+
 		ContentResolver contentResolver = null;
 		try {
 			contentResolver = argContext.getContentResolver();
@@ -911,10 +922,19 @@ public class LibSMSUtils {
 	 * @param phoneNumber
 	 *            PhoneNumber to fetch corresponding call log details. If null,
 	 *            returns complete call log details.
-	 * @return JSONArray which consists of JSONObjects.The fields represent Call
-	 *         Type(1=Received 2=Outgoing 3=Missed),Timestamp of the
-	 *         call,Duration, Caller phone number , Caller phone number
-	 *         type,Name of the caller with key values
+	 * @return JSONArray which consists of JSONObjects.The fields represent <br>
+	 *         <h3>1.Call Type</h3>(1=Received 2=Outgoing 3=Missed),<br>
+	 *         <h3>2.Timestamp of the call</h3><br>
+	 *         <h3>3.Duration</h3><br>
+	 *         <h3>4.Caller phone number</h3><br>
+	 *         <h3>5.Caller phone number type</h3>(1=Home, 2=Mobile,3= Work, 4=
+	 *         Workfax, 5=homefax, 6=pager,7=Other<br>
+	 *         8=Custom, 9=Callback, 10=Car, 11=Company Main, 12=ISDN, 13=Main,
+	 *         14=Other Fax, 15= Radio<br>
+	 *         16=Telex, 17=TTY TDD, 18=WorkMobile, 19=WorkPager, 20=Assistant,
+	 *         21=MMS)<br>
+	 *         <h3>6.Name of the caller</h3><br>
+	 *         with key values
 	 *         "calltype","date","duration","phone","numbertype","name"
 	 *         respectively.The presence of a key-value pair is subject to the
 	 *         availability of the value.

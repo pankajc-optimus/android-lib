@@ -12,10 +12,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class TestSMS extends Activity implements OnClickListener {
-	LibSMSUtils smsUtils;
-	TextView tvSMSAvail, tvMMSAvail, tvShowContact;
-	Button buttonGetContact, buttonSendSMS, buttonSendMMS, buttonSelectPicture;
-	EditText etMessage, etPhone;
+
+	LibSMSUtils	smsUtils;
+	TextView	tvSMSAvail, tvMMSAvail, tvShowContact;
+	Button		buttonGetContact, buttonSendSMS, buttonSendMMS,
+			buttonSelectPicture;
+	EditText	etMessage, etPhone;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -61,60 +63,68 @@ public class TestSMS extends Activity implements OnClickListener {
 		buttonSelectPicture.setOnClickListener(this);
 	}
 
+	 /*
 	public void onClick(View v) {
 		switch (v.getId()) {
 
-		case R.id.buttonGetContact:
+			case R.id.buttonGetContact:
 
-			break;
+				break;
 
-		case R.id.buttonSendSMS:
-			try {
-				smsUtils.sendSMS(this, etMessage.getText().toString(), etPhone
-						.getText().toString(), null);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			break;
+			case R.id.buttonSendSMS:
+				try {
+					smsUtils.sendSMS(this, etMessage.getText().toString(),
+							etPhone.getText().toString(), null);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				break;
 
-		case R.id.buttonSelectPicture:
-			startActivity(new Intent("BrowsePicture"));
+			case R.id.buttonSelectPicture:
+				startActivity(new Intent("BrowsePicture"));
 
-			break;
+				break;
 
-		case R.id.buttonSendMMS:
-			// smsUtils.sendMMSPicture(BrowsePicture.selectedImagePath,
-			// etMessage
-			// .getText().toString(), etPhone.getText().toString(), null);
+			case R.id.buttonSendMMS:
+				// smsUtils.sendMMSPicture(BrowsePicture.selectedImagePath,
+				// etMessage
+				// .getText().toString(), etPhone.getText().toString(), null);
 
-			// smsUtils.deleteConversation(null, null);
+				// smsUtils.deleteConversation(null, null);
 
-			 JSONArray jArray = smsUtils.getListOfConversations(TestSMS.this);
-			 Log.d("Json received:: ", jArray.toString());
+//				JSONArray jArray = smsUtils
+//						.getListOfConversations(TestSMS.this);
+//				Log.d("Json received:: ", jArray.toString());
 
-//			 JSONArray jArray = smsUtils.getTextsfromId(TestSMS.this,
-//			 "2");
-//			 Log.d("Json received:: ", jArray.toString());
+				// JSONArray jArray = smsUtils.getTextsfromId(TestSMS.this,
+				// "2");
+				// Log.d("Json received:: ", jArray.toString());
 
-			// boolean isDeleted = smsUtils.deleteSMS(TestSMS.this, "4");
-			// Log.d("IsDeleted", "" + isDeleted);
+				// boolean isDeleted = smsUtils.deleteSMS(TestSMS.this, "4");
+				// Log.d("IsDeleted", "" + isDeleted);
 
-//			 JSONArray jArray = smsUtils.getUnreadMessages(TestSMS.this);
-//			 Log.d("Json received:: ", jArray.toString());
+				// JSONArray jArray = smsUtils.getUnreadMessages(TestSMS.this);
+				// Log.d("Json received:: ", jArray.toString());
 
-//			 JSONArray jArray = smsUtils.getContacts(this);
-//			 Log.d("Json received:: ", jArray.toString());
-//			 Log.d("Json length:: ",""+ jArray.length());
+				// JSONArray jArray = smsUtils.getContacts(this);
+				// Log.d("Json received:: ", jArray.toString());
+				// Log.d("Json length:: ",""+ jArray.length());
 
-//			 JSONArray jArray = smsUtils.getSMSLog(this, "1349882081589");
-//			 Log.d("Json received:: ", jArray.toString());
+				 JSONArray jArray = smsUtils.getSMSLog(this, "1349882081");
+				 Log.d("Json received:: ", jArray.toString());
 
-//			JSONArray jArray = smsUtils.getCallLog(this,null);
-//			Log.d("Json received:: ", jArray.toString());
-			break;
+				// JSONArray jArray = smsUtils.getCallLog(this, null);
+				// Log.d("Json received:: ", jArray.toString());
+				break;
 		}
 
 	}
+	 */
 
+	 @Override
+	 public void onClick(View v) {
+	 // TODO Auto-generated method stub
+	
+	 }
 }
