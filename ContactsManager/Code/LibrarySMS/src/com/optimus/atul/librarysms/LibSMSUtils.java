@@ -5,6 +5,7 @@
  */
 package com.optimus.atul.librarysms;
 
+import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -831,6 +832,12 @@ public class LibSMSUtils {
 		 * Query the Android content resolver and retrieve the list of all SMS
 		 * in a conversations.
 		 */
+
+		// Creating timestamp object
+//		Timestamp tStamp = new Timestamp(Long.parseLong(timeStamp));
+//		String genericTimeStamp = tStamp.
+//		Log.i("TimeStamp::", genericTimeStamp);
+
 		ContentResolver contentResolver = null;
 		try {
 			contentResolver = argContext.getContentResolver();

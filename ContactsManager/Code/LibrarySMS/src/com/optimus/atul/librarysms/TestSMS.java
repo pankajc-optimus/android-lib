@@ -63,6 +63,7 @@ public class TestSMS extends Activity implements OnClickListener {
 		buttonSelectPicture.setOnClickListener(this);
 	}
 
+	 /*
 	public void onClick(View v) {
 		switch (v.getId()) {
 
@@ -92,9 +93,9 @@ public class TestSMS extends Activity implements OnClickListener {
 
 				// smsUtils.deleteConversation(null, null);
 
-				 JSONArray jArray =
-				 smsUtils.getListOfConversations(TestSMS.this);
-				 Log.d("Json received:: ", jArray.toString());
+//				JSONArray jArray = smsUtils
+//						.getListOfConversations(TestSMS.this);
+//				Log.d("Json received:: ", jArray.toString());
 
 				// JSONArray jArray = smsUtils.getTextsfromId(TestSMS.this,
 				// "2");
@@ -110,14 +111,20 @@ public class TestSMS extends Activity implements OnClickListener {
 				// Log.d("Json received:: ", jArray.toString());
 				// Log.d("Json length:: ",""+ jArray.length());
 
-				// JSONArray jArray = smsUtils.getSMSLog(this, "1349882081589");
-				// Log.d("Json received:: ", jArray.toString());
+				 JSONArray jArray = smsUtils.getSMSLog(this, "1349882081");
+				 Log.d("Json received:: ", jArray.toString());
 
-//				JSONArray jArray = smsUtils.getCallLog(this, null);
-//				Log.d("Json received:: ", jArray.toString());
+				// JSONArray jArray = smsUtils.getCallLog(this, null);
+				// Log.d("Json received:: ", jArray.toString());
 				break;
 		}
 
 	}
+	 */
 
+	 @Override
+	 public void onClick(View v) {
+	 // TODO Auto-generated method stub
+	
+	 }
 }
