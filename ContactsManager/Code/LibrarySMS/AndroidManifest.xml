@@ -40,7 +40,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LibContactLogActivity"
+            android:name="com.optimus.mobility.librarysms.LibContactLogActivity"
             android:label="@string/title_activity_lib_sms" >
             <intent-filter>
                 <action android:name="LibContactLogActivity" />
@@ -50,7 +50,7 @@
         </activity>
 
         <receiver
-            android:name=".LibSMSReceiver"
+            android:name="com.optimus.mobility.librarysms.LibSMSReceiver"
             android:enabled="true" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
