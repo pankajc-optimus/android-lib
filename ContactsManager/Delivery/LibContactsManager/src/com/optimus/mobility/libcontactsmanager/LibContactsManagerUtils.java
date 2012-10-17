@@ -162,10 +162,10 @@ public class LibContactsManagerUtils {
 			throws Exception {
 		SmsManager sms = SmsManager.getDefault();
 
-		if (!checkSMSServiceAvailability(argContext)) {
-			Exception ex = new Exception(exceptionContext);
-			throw ex;
-		}
+		//Incompatibility with Samsung
+//		if (!checkSMSServiceAvailability(argContext)) {
+//			throw new IllegalArgumentException(exceptionContext);
+//		}
 		if (message == null || recipient == null)
 			throw new IllegalArgumentException(exceptionInvalidParamenters);
 
