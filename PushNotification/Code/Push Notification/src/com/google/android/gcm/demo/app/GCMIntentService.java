@@ -70,11 +70,12 @@ public class GCMIntentService extends GCMBaseIntentService {
 	@Override
 	protected void onMessage(Context context, Intent intent) {
 		Log.i(TAG, "Received message");
-		String message = getString(R.string.gcm_message);
+	String extra_message = intent.getExtras().getString("message");
+		String message =extra_message;
 		displayMessage(context, message);
 		// notifies user
 		generateNotification(context, message);
-	}
+	} 
 
 	/**function name : onDeletedMessages
 	 * @param : context
@@ -122,7 +123,7 @@ public class GCMIntentService extends GCMBaseIntentService {
 	/**function name : generateNotification
 	 * Issues a notification to inform the user that server has sent a message.
 	 * @param context
-	 * @param message
+	 * @param message 
 	 */
 	private static void generateNotification(Context context, String message) {
 		int icon = R.drawable.ic_stat_gcm;

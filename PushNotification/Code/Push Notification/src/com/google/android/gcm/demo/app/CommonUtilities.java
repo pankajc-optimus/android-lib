@@ -10,15 +10,15 @@ import android.content.Intent;
  * @author Pooja
  */
 public final class CommonUtilities {
-
+     
    
     //setting the server URL
-	static final String SERVER_URL = "http://192.168.1.119:8080/gcm-demo/";
+	static final String SERVER_URL = "http://192.168.1.225:8080/gcm-demo/";
 
     //setting the sender Id which is the project Id.  
     static final String SENDER_ID = "701087149999"; 
 
-    //Initialising the string "TAG"
+    //Initialising the string  "TAG"
     static final String TAG = "GCMDemo";
 
    //Initialising the string to be displayed while showing the message
