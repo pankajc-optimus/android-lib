@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun name="LibContactsManagerUT" project="LibContactsManagerUT" tests="25" started="25" failures="0" errors="0" ignored="0">
+  <testsuite name="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="8.584">
+    <testcase name="testAndroidTestCaseSetupProperly" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.01"/>
+    <testcase name="testcheckSMSServiceAvailability" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.0"/>
+    <testcase name="testcheckSMSServiceAvailabilityforIllegalArguments" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.0"/>
+    <testcase name="testdeleteConversation" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.024"/>
+    <testcase name="testgetCallLog" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.1"/>
+    <testcase name="testgetCallLogforIllegalArguments" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.0"/>
+    <testcase name="testgetCallLogforNULL" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.2"/>
+    <testcase name="testgetContactsNULL" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="3.475"/>
+    <testcase name="testgetContactsforEmptyJSON" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="3.975"/>
+    <testcase name="testgetContactsforIllegalArguments" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.05"/>
+    <testcase name="testgetListOfConversationsforEmptyJSON" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.125"/>
+    <testcase name="testgetListOfConversationsforIllegalArguments" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.05"/>
+    <testcase name="testgetListOfConversationsforNULL" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.075"/>
+    <testcase name="testgetSMSLogforIllegalArguments1" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.025"/>
+    <testcase name="testgetSMSLogforIllegalArguments2" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.025"/>
+    <testcase name="testgetTextsfromAddressforIllegalArguments1" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.175"/>
+    <testcase name="testgetTextsfromAddressforIllegalArguments2" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.1"/>
+    <testcase name="testgetTextsfromIdforIllegalArguments1" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.0"/>
+    <testcase name="testgetTextsfromIdforIllegalArguments2" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.025"/>
+    <testcase name="testgetUnreadMessagesforIllegalArguments" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.025"/>
+    <testcase name="testgetUnreadMessagesforNULL" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.0"/>
+    <testcase name="testsendSMS" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.025"/>
+    <testcase name="testsendSMSforIllegalArguments1" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.025"/>
+    <testcase name="testsendSMSforIllegalArguments2" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.0"/>
+    <testcase name="testsendSMSforInvalidDestination" classname="com.optimus.mobility.libcontactsmanager.test.LibSMSUtilsUT" time="0.075"/>
+  </testsuite>
+</testrun>
