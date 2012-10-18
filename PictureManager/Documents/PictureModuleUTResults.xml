@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testrun name="PictureModuleUT (1)" project="PictureModuleUT" tests="8" started="8" failures="0" errors="0" ignored="0">
+  <testsuite name="com.example.librarypicturemodule.test.PictureModuleUT" time="7.021">
+    <testcase name="testAndroidTestCaseSetupProperly" classname="com.example.librarypicturemodule.test.PictureModuleUT" time="0.001"/>
+    <testcase name="testCompressImageNullInputForPathProperHandling" classname="com.example.librarypicturemodule.test.PictureModuleUT" time="0.365"/>
+    <testcase name="testCompressImageOutOfBoundaryInputProperHandling" classname="com.example.librarypicturemodule.test.PictureModuleUT" time="4.954"/>
+    <testcase name="testCompressImagePositiveInputProperCompression" classname="com.example.librarypicturemodule.test.PictureModuleUT" time="0.6"/>
+    <testcase name="testRotateImageNullInputProperHandling" classname="com.example.librarypicturemodule.test.PictureModuleUT" time="0.025"/>
+    <testcase name="testSaveImageNullInputForBitmapProperHandling" classname="com.example.librarypicturemodule.test.PictureModuleUT" time="0.0"/>
+    <testcase name="testSaveImageNullInputForFilePathProperHandling" classname="com.example.librarypicturemodule.test.PictureModuleUT" time="0.4"/>
+    <testcase name="testSaveImagePositiveInputSavesFile" classname="com.example.librarypicturemodule.test.PictureModuleUT" time="0.676"/>
+  </testsuite>
+</testrun>
