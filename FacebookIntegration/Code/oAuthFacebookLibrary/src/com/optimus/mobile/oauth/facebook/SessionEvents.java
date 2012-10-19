@@ -9,7 +9,8 @@ package com.optimus.mobile.oauth.facebook;
 import java.util.LinkedList;
 
 /**
- * This class maintains the facebook login session state
+ * This class maintains the facebook login session state and also provides the
+ * session state listeners like authentication listeners.
  * 
  * @author optimus
  */

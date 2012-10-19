@@ -20,12 +20,6 @@ public final class R {
         public static int facebook_icon=0x7f020001;
         public static int ic_action_search=0x7f020002;
         public static int ic_launcher=0x7f020003;
-        public static int login=0x7f020004;
-        public static int login_button=0x7f020005;
-        public static int login_down=0x7f020006;
-        public static int logout=0x7f020007;
-        public static int logout_button=0x7f020008;
-        public static int logout_down=0x7f020009;
     }
     public static final class layout {
         public static int activity_main=0x7f030000;

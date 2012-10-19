@@ -9,6 +9,7 @@ package com.optimus.mobile.oauth.facebook;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.AttributeSet;
@@ -24,9 +25,10 @@ import com.optimus.mobile.oauth.facebook.SessionEvents.AuthListener;
 import com.optimus.mobile.oauth.facebook.SessionEvents.LogoutListener;
 
 /**
- * This is a custom image button for logging into facebook
+ * This is a custom image button which allows the user to login and logout in
+ * facebook and also shows the facebook login session status
  * 
- * @author optimus.support
+ * @author optimus
  * 
  */
 public class LoginButton extends ImageButton {
@@ -37,6 +39,7 @@ public class LoginButton extends ImageButton {
 	private SessionListener mSessionListener = new SessionListener();
 	private String[] mPermissions;
 	private Activity mActivity;
+	private Drawable mLoginDrawable, mLogoutDrawable;
 
 	/**
 	 * Constructor for login button
@@ -75,40 +78,55 @@ public class LoginButton extends ImageButton {
 	}
 
 	/**
-	 * Constructor for login button
+	 * This method initializes the login button and drawable
 	 * 
 	 * @param activity
 	 *            - current activity
+	 * @param login
+	 *            - login state drawable
+	 * @param logout
+	 *            - logout state drawable
 	 * @param fb
-	 *            - facebook object
+	 *            - facebook activity
 	 */
-	public void initialize(final Activity activity, final Facebook fb) {
-		initialize(activity, fb, new String[] {});
+	public void initialize(final Activity activity, Drawable login,
+			Drawable logout, final Facebook fb) {
+		initialize(activity, login, logout, fb, new String[] {});
 	}
 
 	/**
-	 * This method initializes the login button
+	 * This method initializes the login button and drawable
 	 * 
 	 * @param activity
 	 *            - current activity
+	 * @param login
+	 *            - login state drawable
+	 * @param logout
+	 *            - logout state drawable
 	 * @param fb
-	 *            - Facebook object
+	 *            - facebook activity
 	 * @param permissions
 	 *            - set of permissions for login button
 	 */
-	public void initialize(final Activity activity, final Facebook fb,
-			final String[] permissions) {
+	public void initialize(final Activity activity, Drawable login,
+			Drawable logout, final Facebook fb, final String[] permissions) {
 		// initialize the members
 		mActivity = activity;
 		mObjFacebook = fb;
 		mPermissions = permissions;
 		mHandler = new Handler();
+		mLoginDrawable = login;
+		mLogoutDrawable = logout;
+
 		// initialize the button properties
 		setBackgroundColor(Color.TRANSPARENT);
 		setAdjustViewBounds(true);
-		setImageResource(fb.isSessionValid() ? R.drawable.logout_button
-				: R.drawable.login_button);
+		setImageDrawable(fb.isSessionValid() ? mLogoutDrawable : mLoginDrawable);
+
+		// This function is called whenever the state of the view changes in
+		// such a way that it impacts the state of drawable being shown.
 		drawableStateChanged();
+
 		// initialize the sessions states
 		SessionEvents.addAuthListener(mSessionListener);
 		SessionEvents.addLogoutListener(mSessionListener);
@@ -248,7 +266,7 @@ public class LoginButton extends ImageButton {
 		 */
 		public void onAuthSucceed() {
 			// change the button image resource
-			setImageResource(R.drawable.logout_button);
+			setImageDrawable(mLogoutDrawable);
 			SessionStore.save(mObjFacebook, getContext());
 		}
 
@@ -280,7 +298,7 @@ public class LoginButton extends ImageButton {
 		public void onLogoutFinish() {
 			// clear the context and change the image button background resource
 			SessionStore.clear(getContext());
-			setImageResource(R.drawable.login_button);
+			setImageDrawable(mLoginDrawable);
 		}
 	}
 

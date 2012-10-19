@@ -11,6 +11,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+/**
+ * This class stores the session variables in shared preferences
+ * 
+ * @author optimus
+ * 
+ */
 public class SessionStore {
 	// key constants
 	private static final String TOKEN = "access_token";

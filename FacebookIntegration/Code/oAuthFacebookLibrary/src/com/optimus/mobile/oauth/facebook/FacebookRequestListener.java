@@ -1,8 +1,8 @@
 ////////////////////////////////////////////////////////////////////
 // oAuth Facebook Android Library
-// File: BaseRequestListener.java
+// File: FacebookRequestListener.java
 // 
-// Interface for handling facebook requests.
+// Interface for handling facebook request callback.
 ////////////////////////////////////////////////////////////////////
 package com.optimus.mobile.oauth.facebook;
 
@@ -17,7 +17,11 @@ import com.facebook.android.FacebookError;
 
 /**
  * Skeleton base class for RequestListeners, providing default error handling.
- * Applications should handle these error conditions.
+ * 
+ * This is an interface for handling facebook requests callback.
+ * 
+ * This interface is to be implemented whenever we are creating any request for
+ * the facebook API.
  * 
  * @author optimus
  * 
@@ -25,7 +29,9 @@ import com.facebook.android.FacebookError;
 public abstract class FacebookRequestListener implements RequestListener {
 
 	/**
-	 * This method is executed whenever we get any error from the facebook API.
+	 * This method is executed whenever we get any facebook request error
+	 * (Facebook request that could not be fulfilled) error from the facebook
+	 * API.
 	 */
 	public void onFacebookError(FacebookError e, final Object state) {
 		// TODO: Action to be decided in future phases.
@@ -47,8 +53,9 @@ public abstract class FacebookRequestListener implements RequestListener {
 	/**
 	 * This method is executed whenever we get an Input/Output exception while
 	 * facebook request is in progress
-	 */
+	 */	
 	public void onIOException(IOException e, final Object state) {
+		// TODO: Action to be decided in future phases.
 		Log.e("Facebook", e.getMessage());
 		e.printStackTrace();
 	}
@@ -59,6 +66,7 @@ public abstract class FacebookRequestListener implements RequestListener {
 	 */
 	public void onMalformedURLException(MalformedURLException e,
 			final Object state) {
+		// TODO: Action to be decided in future phases.
 		Log.e("Facebook", e.getMessage());
 		e.printStackTrace();
 	}
