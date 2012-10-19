@@ -16,19 +16,25 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.annotation.SuppressLint;
 import android.app.PendingIntent;
+import android.content.ContentProviderOperation;
+import android.content.ContentProviderResult;
 import android.content.ContentResolver;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.CallLog;
+import android.provider.ContactsContract;
 import android.provider.ContactsContract.CommonDataKinds.Email;
 import android.provider.ContactsContract.CommonDataKinds.Phone;
 import android.provider.ContactsContract.Contacts;
 import android.provider.ContactsContract.Data;
+import android.provider.ContactsContract.RawContacts;
 import android.telephony.SmsManager;
 import android.util.Log;
 
@@ -162,10 +168,10 @@ public class LibContactsManagerUtils {
 			throws Exception {
 		SmsManager sms = SmsManager.getDefault();
 
-		//Incompatibility with Samsung
-//		if (!checkSMSServiceAvailability(argContext)) {
-//			throw new IllegalArgumentException(exceptionContext);
-//		}
+		// Incompatibility with Samsung
+		// if (!checkSMSServiceAvailability(argContext)) {
+		// throw new IllegalArgumentException(exceptionContext);
+		// }
 		if (message == null || recipient == null)
 			throw new IllegalArgumentException(exceptionInvalidParamenters);
 
@@ -298,6 +304,7 @@ public class LibContactsManagerUtils {
 	 *         values "thread_id" and "address" respectively.The presence of a
 	 *         key-value pair is subject to the availability of the value.
 	 */
+	@SuppressLint("UseSparseArrays")
 	public JSONArray getListOfConversations(Context argContext) {
 
 		// Creating a new JSONArray for storing the result.
@@ -863,6 +870,7 @@ public class LibContactsManagerUtils {
 		}
 		String[] columnNames = query.getColumnNames();
 		for (String str : columnNames) {
+
 			if (debugMode)
 				Log.d("ColumnName", str);
 		}
@@ -875,6 +883,19 @@ public class LibContactsManagerUtils {
 		return obj;
 	}
 
+	/**
+	 * Creates a JSONArray by extracting data from the Cursor according to the
+	 * column strings provided.
+	 * 
+	 * @param query
+	 *            Data Cursor
+	 * @param columnNames
+	 *            Column Names
+	 * @param jObj
+	 *            JSONArray to be populated
+	 * @return Boolean indicating the success of this operation
+	 * @throws JSONException
+	 */
 	private boolean putCursorToJArray(Cursor query, String[] columnNames,
 			JSONArray jObj) throws JSONException {
 
@@ -894,6 +915,304 @@ public class LibContactsManagerUtils {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Adds a Call log entry into system database.
+	 * 
+	 * @param argContext
+	 *            Context of the activity calling this function.
+	 * @param duration
+	 *            Duration of the call log to be entered.
+	 * @param contactPhone
+	 *            Contact phone number of the call log to be entered.
+	 * @param timeStamp
+	 *            SQL Timestamp (13-digits) indicating the time of call.(If
+	 *            null, registers the call time as epoch time)
+	 * @param callType
+	 *            Type of call (1=Received 2=Outgoing 3=Missed) (If null,
+	 *            registers as Received call)
+	 * @param statusNew
+	 *            Whether the call is reviewed (Values: 0,1) (If null, registers
+	 *            as 0)
+	 * @return The Uri of the newly created database row
+	 */
+	public Uri addCallLog(Context argContext, String duration,
+			String contactPhone, String timeStamp, String callType,
+			String statusNew) {
+
+		// Check input parameters
+
+		// argContext
+		if (argContext == null) {
+			throw new IllegalArgumentException(exceptionInvalidParamenters
+					+ ":: argContext");
+		}
+
+		// Call Duration
+		try {
+			Integer.parseInt(duration);
+		} catch (Exception e) {
+			throw new IllegalArgumentException(exceptionInvalidParamenters
+					+ ":: duration");
+		}
+
+		// Phone Number
+		if (contactPhone == null)
+			throw new IllegalArgumentException(exceptionInvalidParamenters
+					+ ":: contactPhone");
+
+		// Call Duration
+		if (statusNew != null) {
+			try {
+				Integer.parseInt(duration);
+			} catch (Exception e) {
+				throw new IllegalArgumentException(exceptionInvalidParamenters
+						+ ":: statusNew");
+			}
+		}
+		// Initializing content resolver
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException(exceptionContext);
+		} finally {
+			if (contentResolver == null)
+				throw new IllegalArgumentException(exceptionContext);
+		}
+
+		// Building content values to be populated in system database
+		ContentValues newValues = new ContentValues();
+		newValues.put(CallLog.Calls.DATE, timeStamp);
+		newValues.put(CallLog.Calls.DURATION, duration);
+		newValues.put(CallLog.Calls.NUMBER, contactPhone);
+		newValues.put(CallLog.Calls.TYPE, callType);
+		newValues.put(CallLog.Calls.NEW, statusNew);
+
+		// Inserting into database
+		Uri query = contentResolver
+				.insert(CallLog.Calls.CONTENT_URI, newValues);
+
+		if (debugMode)
+			Log.d("Content Uri", "" + ContentUris.parseId(query));
+
+		return query;
+	}
+
+	/**
+	 * Adds a SMS entry into system database.
+	 * 
+	 * @param argContext
+	 *            Context of the activity calling this function.
+	 * @param argAddress
+	 *            Phone number
+	 * @param argTimestamp
+	 *            Timestamp of the SMS
+	 * @param argBody
+	 *            SMS Text body
+	 * @param argRead
+	 *            Read status (1=Read,0=Unread)
+	 * @return The Uri of the newly created database row
+	 */
+	public Uri addSMSLog(Context argContext, String argAddress,
+			String argTimestamp, String argBody, String argRead) {
+		// Check input parameters
+
+		// argContext
+		if (argContext == null || argAddress == null || argTimestamp == null
+				|| argBody == null || argRead == null) {
+			throw new IllegalArgumentException(exceptionInvalidParamenters);
+		}
+
+		// Read status
+		try {
+			Integer.parseInt(argRead);
+		} catch (Exception e) {
+			throw new IllegalArgumentException(exceptionInvalidParamenters
+					+ ":: statusNew");
+		}
+
+		// Initializing content resolver
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException(exceptionContext);
+		} finally {
+			if (contentResolver == null)
+				throw new IllegalArgumentException(exceptionContext);
+		}
+
+		Uri uriQuery = Uri.parse("content://sms");
+
+		// Building content values to be populated in system database
+		ContentValues newValues = new ContentValues();
+		newValues.put("person", "Bill Gates");
+		newValues.put("address", argAddress);
+		newValues.put("date", argTimestamp);
+		newValues.put("body", argBody);
+		newValues.put("read", argRead);
+
+		// Inserting into database
+		Uri query = contentResolver.insert(uriQuery, newValues);
+
+		if (debugMode)
+			Log.d("Content Uri", "" + ContentUris.parseId(query));
+
+		return query;
+
+	}
+
+	/**
+	 * Adds a contact into system database.
+	 * 
+	 * @param argContext
+	 *            Context of the activity calling this function.
+	 * @param DisplayName
+	 *            Display name of the contact
+	 * @param MobileNumber
+	 *            Mobile number of the contact
+	 * @param HomeNumber
+	 *            Home number of the contact
+	 * @param WorkNumber
+	 *            Work number of the contact
+	 * @param emailID
+	 *            Email id of the contact
+	 * @return Boolean indicating the success/failure of this operation
+	 */
+	public boolean addContact(Context argContext, String DisplayName,
+			String MobileNumber, String HomeNumber, String WorkNumber,
+			String emailID) {
+		// Check input parameters
+
+		// argContext
+		if (argContext == null) {
+			throw new IllegalArgumentException(exceptionInvalidParamenters
+					+ ":: argContext");
+		}
+
+		boolean funcResult = false;
+		// Initializing content resolver
+		ContentResolver contentResolver = null;
+		try {
+			contentResolver = argContext.getContentResolver();
+		} catch (Exception e) {
+			throw new IllegalArgumentException(exceptionContext);
+		} finally {
+			if (contentResolver == null)
+				throw new IllegalArgumentException(exceptionContext);
+		}
+
+		ArrayList<ContentProviderOperation> ops = new ArrayList<ContentProviderOperation>();
+		ops.add(ContentProviderOperation
+				.newInsert(ContactsContract.RawContacts.CONTENT_URI)
+				.withValue(ContactsContract.RawContacts.ACCOUNT_TYPE, null)
+				.withValue(ContactsContract.RawContacts.ACCOUNT_NAME, null)
+				.withValue(RawContacts.AGGREGATION_MODE,
+						RawContacts.AGGREGATION_MODE_DISABLED)
+
+				.build());
+		// ------------------------------------------------------ Names
+		if (DisplayName != null) {
+			ops.add(ContentProviderOperation
+					.newInsert(ContactsContract.Data.CONTENT_URI)
+					.withValueBackReference(
+							ContactsContract.Data.RAW_CONTACT_ID, 0)
+					.withValue(
+							ContactsContract.Data.MIMETYPE,
+							ContactsContract.CommonDataKinds.StructuredName.CONTENT_ITEM_TYPE)
+					.withValue(
+							ContactsContract.CommonDataKinds.StructuredName.DISPLAY_NAME,
+							DisplayName).build());
+			if (!funcResult)
+				funcResult = true;
+		}
+
+		// ------------------------------------------------------ Mobile Number
+		if (MobileNumber != null) {
+			ops.add(ContentProviderOperation
+					.newInsert(ContactsContract.Data.CONTENT_URI)
+					.withValueBackReference(
+							ContactsContract.Data.RAW_CONTACT_ID, 0)
+					.withValue(
+							ContactsContract.Data.MIMETYPE,
+							ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+					.withValue(ContactsContract.CommonDataKinds.Phone.NUMBER,
+							MobileNumber)
+					.withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
+							ContactsContract.CommonDataKinds.Phone.TYPE_MOBILE)
+					.build());
+			if (!funcResult)
+				funcResult = true;
+		}
+
+		// ------------------------------------------------------ Home Numbers
+		if (HomeNumber != null) {
+			ops.add(ContentProviderOperation
+					.newInsert(ContactsContract.Data.CONTENT_URI)
+					.withValueBackReference(
+							ContactsContract.Data.RAW_CONTACT_ID, 0)
+					.withValue(
+							ContactsContract.Data.MIMETYPE,
+							ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+					.withValue(ContactsContract.CommonDataKinds.Phone.NUMBER,
+							HomeNumber)
+					.withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
+							ContactsContract.CommonDataKinds.Phone.TYPE_HOME)
+					.build());
+			if (!funcResult)
+				funcResult = true;
+		}
+
+		// ------------------------------------------------------ Work Numbers
+		if (WorkNumber != null) {
+			ops.add(ContentProviderOperation
+					.newInsert(ContactsContract.Data.CONTENT_URI)
+					.withValueBackReference(
+							ContactsContract.Data.RAW_CONTACT_ID, 0)
+					.withValue(
+							ContactsContract.Data.MIMETYPE,
+							ContactsContract.CommonDataKinds.Phone.CONTENT_ITEM_TYPE)
+					.withValue(ContactsContract.CommonDataKinds.Phone.NUMBER,
+							WorkNumber)
+					.withValue(ContactsContract.CommonDataKinds.Phone.TYPE,
+							ContactsContract.CommonDataKinds.Phone.TYPE_WORK)
+					.build());
+			if (!funcResult)
+				funcResult = true;
+		}
+
+		// ------------------------------------------------------ Email
+		if (emailID != null) {
+			ops.add(ContentProviderOperation
+					.newInsert(ContactsContract.Data.CONTENT_URI)
+					.withValueBackReference(
+							ContactsContract.Data.RAW_CONTACT_ID, 0)
+					.withValue(
+							ContactsContract.Data.MIMETYPE,
+							ContactsContract.CommonDataKinds.Email.CONTENT_ITEM_TYPE)
+					.withValue(ContactsContract.CommonDataKinds.Email.DATA,
+							emailID)
+					.withValue(ContactsContract.CommonDataKinds.Email.TYPE,
+							ContactsContract.CommonDataKinds.Email.TYPE_WORK)
+					.build());
+			if (!funcResult)
+				funcResult = true;
+		}
+
+		// Asking the Contact provider to create a new contact
+		try {
+			ContentProviderResult[] result = contentResolver.applyBatch(
+					ContactsContract.AUTHORITY, ops);
+			for (int i = 0; i < result.length; i++) {
+				Log.d("Resolver Result", "" + result[i].toString());
+
+			}
+		} catch (Exception e) {
+
+		}
+		return funcResult;
 	}
 
 }
