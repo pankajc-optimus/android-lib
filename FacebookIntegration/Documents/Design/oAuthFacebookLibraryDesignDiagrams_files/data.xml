@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<VisioDocument>
+	<DocumentProperties>
+		<Title></Title>
+		<HyperlinkBase href=""></HyperlinkBase>
+	</DocumentProperties>
+	<Pages>
+		<Page ID="4" Name="Class Diagram" NameU="Static Structure-2">
+			<Shapes>
+				<Shape ID="1" UniqueID="{0ED17D10-6416-48AE-A836-D031BBB5C2E3}" Name="Watermark Title" NameU="Watermark Title" Master="18">
+					<Text>Static Structure</Text>
+					<XForm>
+						<PinX Unit="IN">0.000000000000000</PinX>
+						<PinY Unit="IN">11.000000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="8" UniqueID="{427AE4E5-4B28-436F-9B49-D128C8BFF059}" Name="Interface .8" NameU="Interface .8" Master="23">
+					<Text>«interface»
+FacebookRequestListener</Text>
+					<XForm>
+						<PinX Unit="IN">1.100000000000000</PinX>
+						<PinY Unit="IN">6.627826251898871</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="14" UniqueID="{5A14D1BA-02FB-43EC-ADFC-BF4AEDAE3E95}" Name="Class" NameU="Class" Master="24">
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">8.531920461697050</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="19" UniqueID="{548843C4-5A39-478B-B672-55DA5A77B96F}" Name="Operations" NameU="Operations">
+					<Text>+initialize()</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">8.151340923394098</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="20" UniqueID="{8EEC653E-707C-4E38-8980-E6EFBEFD37C5}" Name="Attributes" NameU="Attributes">
+					<Text>-LoginDialogListener
+-LogoutRequestListener
+-SessionListener
+-ButtonOnClickListener</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">8.519420461697049</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="21" UniqueID="{537A8D2B-B3B7-4BDC-AD58-604FA3374A51}" Name="Name" NameU="Name">
+					<Text>LoginButton</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">8.900000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="23" UniqueID="{698B3CD3-76E2-46B8-BDF1-464776628CD4}" Name="Class.23" NameU="Class.23" Master="24">
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">7.298586874050565</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="28" UniqueID="{67533490-80A4-497A-ACB9-E4412C2796E4}" Name="Operations" NameU="Operations">
+					<Text>+save()
++restore()
++clear()</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">7.111086874050565</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="30" UniqueID="{A9F78645-1E20-4037-93F3-918CEFD1C770}" Name="Name" NameU="Name">
+					<Text>SessionStore</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">7.600000000000001</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="32" UniqueID="{9A64EDFA-21EA-4857-A516-AB3733E46EEC}" Name="Class.32" NameU="Class.32" Master="24">
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">5.805508098687066</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="37" UniqueID="{1A1A58B0-1132-4A65-A2EF-4950EC0ADDCA}" Name="Operations" NameU="Operations">
+					<Text>+addAuthListener()
++removeAuthListener()
++addLogoutListener()
++removeLogoutListener()
++onLoginSuccess()
++onLoginError()
++onLogoutBegin()
++onLogoutFinish()</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">5.558261385091146</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="38" UniqueID="{B98440A6-B628-4DFC-BEF3-7286A4FADCD4}" Name="Attributes" NameU="Attributes">
+					<Text>-AuthListener
+-LogoutListener</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">6.252753286404080</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="39" UniqueID="{C143C5C2-58E6-4B09-A6A5-A257B0FC6636}" Name="Name" NameU="Name">
+					<Text>SessionEvents</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">6.500000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="5" UniqueID="{C1C8B17F-9BDE-4BAB-A574-12C32078D708}" Name="Package" NameU="Package" Master="22">
+					<Text>FacebookSDK</Text>
+					<XForm>
+						<PinX Unit="IN">4.050000000000000</PinX>
+						<PinY Unit="IN">9.750000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="13" UniqueID="{1925A933-CB58-48CD-9B34-D04B5F6C92D4}" Name="Generalization.13" NameU="Generalization.13" Master="25">
+					<XForm>
+						<PinX Unit="IN">5.925000000000000</PinX>
+						<PinY Unit="IN">9.375000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="42" UniqueID="{FA357F1C-4D14-415D-9F64-32F965EC5A08}" Name="Generalization.42" NameU="Generalization.42" Master="25">
+					<XForm>
+						<PinX Unit="IN">2.250000000000000</PinX>
+						<PinY Unit="IN">8.402826251898871</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="44" UniqueID="{4BFBD1CA-415C-4FEF-9C4A-8D4179FA21BA}" Name="Generalization.44" NameU="Generalization.44" Master="25">
+					<XForm>
+						<PinX Unit="IN">6.724999999999998</PinX>
+						<PinY Unit="IN">8.725000000000001</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="46" UniqueID="{53BB21D5-DAC7-49C3-AB2F-3AC719CF504A}" Name="Class.46" NameU="Class.46" Master="24">
+					<XForm>
+						<PinX Unit="IN">4.000000000000000</PinX>
+						<PinY Unit="IN">1.780000000000039</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="51" UniqueID="{DD8E3238-D98B-4F8F-B7F6-B5857D3F5D77}" Name="Operations" NameU="Operations">
+					<Text>+initialize()()</Text>
+					<XForm>
+						<PinX Unit="IN">4.000000000000000</PinX>
+						<PinY Unit="IN">1.399420461697087</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="52" UniqueID="{D7E22727-76E5-4B77-B06D-E624B731F613}" Name="Attributes" NameU="Attributes">
+					<Text>-SampleAuthListener
+-SampleRequestListener
+-SampleLogoutListener
+-</Text>
+					<XForm>
+						<PinX Unit="IN">4.000000000000000</PinX>
+						<PinY Unit="IN">1.767500000000039</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="53" UniqueID="{03E16847-4A57-4751-A8EA-D8AEB1C80A2C}" Name="Name" NameU="Name">
+					<Text>SampleFacebookActivity</Text>
+					<XForm>
+						<PinX Unit="IN">4.000000000000000</PinX>
+						<PinY Unit="IN">2.148079538302990</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="57" UniqueID="{4649FCB3-BA6D-431C-915F-4A9F3BC6EA2A}" Name="Generalization.57" NameU="Generalization.57" Master="25">
+					<XForm>
+						<PinX Unit="IN">5.375000000000000</PinX>
+						<PinY Unit="IN">5.390000000000020</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="55" UniqueID="{469F8B6D-248C-4607-8727-20CFF63B909A}" Name="Generalization.55" NameU="Generalization.55" Master="25">
+					<XForm>
+						<PinX Unit="IN">5.375000000000000</PinX>
+						<PinY Unit="IN">6.706793437025290</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="59" UniqueID="{16E0C326-50B4-4624-A69F-52B89FD53A54}" Name="Generalization.59" NameU="Generalization.59" Master="25">
+					<XForm>
+						<PinX Unit="IN">5.375000000000000</PinX>
+						<PinY Unit="IN">4.026793818495028</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="61" UniqueID="{2BDA2DFD-DFB3-4FD5-B661-3D02285DC039}" Name="Generalization.61" NameU="Generalization.61" Master="25">
+					<XForm>
+						<PinX Unit="IN">2.625000000000000</PinX>
+						<PinY Unit="IN">4.437952895100930</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="63" UniqueID="{EEEA045F-67BA-4BC7-AB92-1529D5717275}" Name="Generalization.63" NameU="Generalization.63" Master="25">
+					<XForm>
+						<PinX Unit="IN">4.025000000000000</PinX>
+						<PinY Unit="IN">5.824039769151495</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="65" UniqueID="{77C22867-6AE5-4946-BCA7-B158C7789CA4}" Name="Class.65" NameU="Class.65" Master="24">
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">3.718077249484592</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="70" UniqueID="{C00529A0-1FE4-490A-AE6E-E7C09E249D80}" Name="Operations" NameU="Operations">
+					<Text>+checkInLocation()
++deleteWallPost()
++encodeUrl()
++executeFQLQuery()
++executeGraphAPIRequest()
++getOrientation()
++getPlaces()
++graphAPISearch()
++postToWall()
++requestUserInfo()
++scaleImage()
++showAlert()
++uploadPhoto()</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">3.530577249484592</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="72" UniqueID="{D2F931EB-2D33-4324-A66E-BF52BDB1E015}" Name="Name" NameU="Name">
+					<Text>Utility</Text>
+					<XForm>
+						<PinX Unit="IN">7.150000000000000</PinX>
+						<PinY Unit="IN">4.686154498969184</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="74" UniqueID="{77F0F976-0083-4739-9017-047AF80AADB8}" Name="Generalization.74" NameU="Generalization.74" Master="25">
+					<XForm>
+						<PinX Unit="IN">5.375000000000000</PinX>
+						<PinY Unit="IN">4.234935533989809</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="76" UniqueID="{8D24A2A5-72A3-48BD-AEFD-56BFD27D44E2}" Name="Generalization.76" NameU="Generalization.76" Master="25">
+					<XForm>
+						<PinX Unit="IN">5.400000000000000</PinX>
+						<PinY Unit="IN">6.913557937113445</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="78" UniqueID="{BE6BAAD4-DFAF-4AA4-A38F-8C78957C54E3}" Name="Interface .78" NameU="Interface .78" Master="23">
+					<Text>«interface»
+FacebookRequestListener</Text>
+					<XForm>
+						<PinX Unit="IN">1.100000000000000</PinX>
+						<PinY Unit="IN">5.572173748101128</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="81" UniqueID="{0FD16C6B-D805-4A24-B58E-53505E9D3A05}" Name="Generalization" NameU="Generalization" Master="25">
+					<XForm>
+						<PinX Unit="IN">1.900000000000000</PinX>
+						<PinY Unit="IN">3.495506954277905</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="83" UniqueID="{300D6787-DD22-4567-B852-D6024CF0C6D8}" Name="Generalization.83" NameU="Generalization.83" Master="25">
+					<XForm>
+						<PinX Unit="IN">2.812500000000000</PinX>
+						<PinY Unit="IN">7.486086874050564</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+		<Page ID="0" Name="Sequence Diagram" NameU="Static Structure-1">
+			<Shapes>
+				<Shape ID="1" UniqueID="{5D1083B0-0236-4573-9B00-631EE315FF43}" Name="Watermark Title" NameU="Watermark Title" Master="18">
+					<Text>Static Structure</Text>
+					<XForm>
+						<PinX Unit="IN">0.000000000000000</PinX>
+						<PinY Unit="IN">11.000000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="2" UniqueID="{E87E89CF-FB87-4D65-A684-0B65DA1EE267}" Name="Object Lifeline" NameU="Object Lifeline" Master="27">
+					<Text>Facebook</Text>
+					<XForm>
+						<PinX Unit="IN">5.699999999999999</PinX>
+						<PinY Unit="IN">10.625000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="8" UniqueID="{EFF2DB46-21B4-4C4D-86C6-AF46CD289149}" Name="Object Lifeline.8" NameU="Object Lifeline.8" Master="27">
+					<Text>LoginButton</Text>
+					<XForm>
+						<PinX Unit="IN">0.775000000000000</PinX>
+						<PinY Unit="IN">10.625000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="14" UniqueID="{69A1DD2E-1627-489A-8377-1098E49E172D}" Name="Activation" NameU="Activation" Master="28">
+					<XForm>
+						<PinX Unit="IN">0.775000000000000</PinX>
+						<PinY Unit="IN">9.024999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="15" UniqueID="{60B8309E-D650-44E1-B765-66718DDF0308}" Name="Activation.15" NameU="Activation.15" Master="28">
+					<XForm>
+						<PinX Unit="IN">5.699999999999999</PinX>
+						<PinY Unit="IN">9.074999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="16" UniqueID="{C1D1AE83-281B-4D22-A3B1-53EB6974A978}" Name="Message" NameU="Message" Master="29">
+					<Text>Facebook.authorize()</Text>
+					<XForm>
+						<PinX Unit="IN">3.237500000000000</PinX>
+						<PinY Unit="IN">9.424999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="17" UniqueID="{3419AB15-02AF-49EE-BD41-C692DEA4A9DA}" Name="Object Lifeline.17" NameU="Object Lifeline.17" Master="27">
+					<Text>SessionEvents</Text>
+					<XForm>
+						<PinX Unit="IN">2.743706929346571</PinX>
+						<PinY Unit="IN">10.625000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="23" UniqueID="{5606429B-D83E-48F0-89D7-77DA40CD5A08}" Name="Activation.23" NameU="Activation.23" Master="28">
+					<XForm>
+						<PinX Unit="IN">2.743706929346571</PinX>
+						<PinY Unit="IN">8.650000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="25" UniqueID="{003C75F6-57A9-4F31-8B39-EB0A6B49627F}" Name="Message.25" NameU="Message.25" Master="29">
+					<Text>Login Successful</Text>
+					<XForm>
+						<PinX Unit="IN">3.237500000000000</PinX>
+						<PinY Unit="IN">9.174999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="26" UniqueID="{1097DD02-F22C-4E6F-8218-2DDAA47A5BE3}" Name="Activation.26" NameU="Activation.26" Master="28">
+					<XForm>
+						<PinX Unit="IN">0.775000000000000</PinX>
+						<PinY Unit="IN">7.324999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="27" UniqueID="{7AA06AC6-3637-4CF5-960E-25B6DC1FE3E2}" Name="Message.27" NameU="Message.27" Master="29">
+					<Text>Facebook.authorize()</Text>
+					<XForm>
+						<PinX Unit="IN">3.237500000000000</PinX>
+						<PinY Unit="IN">7.699999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="28" UniqueID="{F442101A-3B8C-4952-96C0-39CC9F900699}" Name="Activation.28" NameU="Activation.28" Master="28">
+					<XForm>
+						<PinX Unit="IN">5.699999999999999</PinX>
+						<PinY Unit="IN">7.324999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="24" UniqueID="{C6D240B3-3126-40E9-B539-02A4380812D5}" Name="Message.24" NameU="Message.24" Master="29">
+					<Text>SessionEvents.onLoginSucess</Text>
+					<XForm>
+						<PinX Unit="IN">1.759353464673285</PinX>
+						<PinY Unit="IN">8.649999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="29" UniqueID="{444D45C4-1788-43E4-9063-088287358CC2}" Name="Activation.29" NameU="Activation.29" Master="28">
+					<XForm>
+						<PinX Unit="IN">2.743706929346571</PinX>
+						<PinY Unit="IN">7.000000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="30" UniqueID="{5D7AE821-8A1D-440F-BA2D-A3C85C7E84DD}" Name="Message.30" NameU="Message.30" Master="29">
+					<Text>Facebook Error</Text>
+					<XForm>
+						<PinX Unit="IN">3.237500000000000</PinX>
+						<PinY Unit="IN">7.449999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="31" UniqueID="{761DD78B-D442-4072-BB6C-A11B4879EAAA}" Name="Message.31" NameU="Message.31" Master="29">
+					<Text>SessionEvents.onLoginError</Text>
+					<XForm>
+						<PinX Unit="IN">1.759353464673285</PinX>
+						<PinY Unit="IN">6.949999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="32" UniqueID="{9F7D610E-6314-483F-B482-B277B0C51270}" Name="Object Lifeline.32" NameU="Object Lifeline.32" Master="27">
+					<Text>Utility</Text>
+					<XForm>
+						<PinX Unit="IN">7.175000000000000</PinX>
+						<PinY Unit="IN">10.625000000000000</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="38" UniqueID="{C51DC5EE-E217-495B-83EF-FFE99DB58A68}" Name="Activation.38" NameU="Activation.38" Master="28">
+					<XForm>
+						<PinX Unit="IN">7.175000000000000</PinX>
+						<PinY Unit="IN">6.449999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="39" UniqueID="{04814837-20E9-46A3-BC01-9797B456EDCA}" Name="Activation.39" NameU="Activation.39" Master="28">
+					<XForm>
+						<PinX Unit="IN">0.775000000000000</PinX>
+						<PinY Unit="IN">6.324999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="40" UniqueID="{F25A2A9F-4ED5-413B-BF9B-643566A85000}" Name="Message (async.)" NameU="Message (async.)" Master="31">
+					<Text>Request User Information Call (Asynchronous)</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">6.449999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="41" UniqueID="{C6E56121-1225-4783-A353-1B12790D574C}" Name="Activation.41" NameU="Activation.41" Master="28">
+					<XForm>
+						<PinX Unit="IN">0.775000000000000</PinX>
+						<PinY Unit="IN">5.824999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="43" UniqueID="{E7439577-44FE-499A-B10B-F3AF592816FD}" Name="Message (call)" NameU="Message (call)" Master="34">
+					<Text>Post feed to wall (request Dialog base )</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">5.949999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="42" UniqueID="{4A7B1954-2BBA-4088-912F-107875A0F137}" Name="Message.42" NameU="Message.42" Master="29">
+					<Text>Dialog base response</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">5.699999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="44" UniqueID="{5018F056-32AF-4BF6-8004-28A183417C91}" Name="Activation.44" NameU="Activation.44" Master="28">
+					<XForm>
+						<PinX Unit="IN">0.775000000000000</PinX>
+						<PinY Unit="IN">5.074999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="45" UniqueID="{A8E35685-FD53-4171-B485-4A1475182194}" Name="Message (async.).45" NameU="Message (async.).45" Master="31">
+					<Text>Delete post call (asynchronous)</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">5.199999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="46" UniqueID="{51016504-C599-4687-AF4A-57FC81D3190D}" Name="Activation.46" NameU="Activation.46" Master="28">
+					<XForm>
+						<PinX Unit="IN">0.775000000000000</PinX>
+						<PinY Unit="IN">4.324999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="47" UniqueID="{A88785B7-AB38-410B-BBDC-2E94C5BC62CB}" Name="Message (async.).47" NameU="Message (async.).47" Master="31">
+					<Text>get near by places</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">4.699999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="48" UniqueID="{C882363A-1B14-4C5E-A073-E554168701A6}" Name="Message (return)" NameU="Message (return)" Master="35">
+					<Text>Response from facebook server</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">4.449999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="49" UniqueID="{D04FA441-398D-4BC6-9A63-15D8FC9FAC7C}" Name="Message (return).49" NameU="Message (return).49" Master="35">
+					<Text>Response from facebook server</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">6.199999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="50" UniqueID="{35438F12-ACA2-4A90-A222-61DF397F5081}" Name="Message (return).50" NameU="Message (return).50" Master="35">
+					<Text>Response from facebook server</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">4.949999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="51" UniqueID="{4BACFC4F-90CA-41AC-837C-969088409853}" Name="Message (async.).51" NameU="Message (async.).51" Master="31">
+					<Text>Check in location (asynchronous)</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">4.199999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="52" UniqueID="{B16A4744-594A-470B-87DE-15D16B33A70A}" Name="Message (return).52" NameU="Message (return).52" Master="35">
+					<Text>Response from facebook server</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">3.949999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="53" UniqueID="{B01B4D0B-39AF-44BB-9EF4-515166C4D5C2}" Name="Activation.53" NameU="Activation.53" Master="28">
+					<XForm>
+						<PinX Unit="IN">0.775000000000000</PinX>
+						<PinY Unit="IN">3.324999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="54" UniqueID="{EF881173-6A17-4362-ACB7-98CE9DBF9281}" Name="Message (async.).54" NameU="Message (async.).54" Master="31">
+					<Text>Upload photo (asynchrobnous)</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">3.449999999999999</PinY>
+					</XForm>
+				</Shape>
+				<Shape ID="55" UniqueID="{C0A2676B-2227-42AE-BE4E-7DD24F35A13A}" Name="Message (return).55" NameU="Message (return).55" Master="35">
+					<Text>Response from facebook server</Text>
+					<XForm>
+						<PinX Unit="IN">3.975000000000000</PinX>
+						<PinY Unit="IN">3.199999999999999</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+		<Page ID="5" Name="Static Structure-1" NameU="Page-4">
+			<Shapes>
+				<Shape ID="1" UniqueID="{77447932-8C72-4119-AA86-EE1A6C8ECA27}" Name="Watermark Title" NameU="Watermark Title" Master="18">
+					<Text>Static Structure</Text>
+					<XForm>
+						<PinX Unit="IN">0.000000000000000</PinX>
+						<PinY Unit="IN">11.000000000000000</PinY>
+					</XForm>
+				</Shape>
+			</Shapes>
+		</Page>
+	</Pages>
+</VisioDocument>
