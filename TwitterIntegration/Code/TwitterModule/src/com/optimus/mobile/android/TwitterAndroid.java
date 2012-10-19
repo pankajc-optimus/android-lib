@@ -109,14 +109,10 @@ public class TwitterAndroid extends Activity {
 					sendTweet();
 				/**
 				 * If the user hasn't authenticated to Twitter yet, he'll be
-				 * redirected via a browser to the twitter login page. Once the
-				 * user authenticated, he'll authorise the Android application
-				 * to send tweets on the users behalf.
+				 * notified that he has to login first
 				 */
 				else {
-					Intent i = new Intent(getApplicationContext(),
-							PrepareRequestTokenActivity.class);
-					startActivity(i);
+					Toast.makeText(TwitterAndroid.this, "You need to Login first !!!", Toast.LENGTH_SHORT).show();
 				}
 
 			}
