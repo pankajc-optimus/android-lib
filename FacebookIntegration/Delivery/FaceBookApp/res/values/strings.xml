@@ -1,0 +1,29 @@
+<resources>
+
+    <string name="app_name">Facebook App</string>
+    <string name="hello">Hello World!</string>
+    <string name="title_access_token">Access Token</string>
+    <string name="title_expiration_time">Expiration Time</string>
+    <string name="title_fqlquery">Enter FQL Query:</string>
+    <string name="title_graphAPi">Grap API (Enter Object Id):</string>
+
+    <!-- Hint values -->
+    <string name="hint_latitude">Latitude</string>
+    <string name="hint_longitude">Longitude</string>
+    <string name="hint_query">query string</string>
+    <string name="hint_type">type</string>
+
+    <!-- Button labels -->
+    <string name="button_done">Done</string>
+    <string name="button_request_info">Request User Information</string>
+    <string name="button_access_token">Get Access Token</string>
+    <string name="button_post_to_wall">Post To Wall</string>
+    <string name="button_delete_wall_post">Delete Wall Post</string>
+    <string name="button_check_in">Check In</string>
+    <string name="button_upload_photo">Upload Photo From Gallery</string>
+    <string name="button_fql_interface">FQL Interface</string>
+    <string name="button_execute_query">Execute Query</string>
+    <string name="button_graph_interface">Graph API Interface</string>
+    <string name="button_search">Search</string>
+
+</resources>
