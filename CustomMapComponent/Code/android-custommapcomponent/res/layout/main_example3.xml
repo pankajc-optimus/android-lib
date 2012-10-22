@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- use the custom TapControlledMapView -->
+
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+	>
+
+    <Button
+      android:id = "@+id/animateToDefaultLocation"
+	  android:layout_alignParentTop="true"
+	  android:layout_width="wrap_content"
+	  android:layout_height="wrap_content"
+	  android:text="animateToDefaultLocation"
+	  android:onClick="animateToDefaultLocation"
+	  >	  
+    </Button>
+    
+<android.custommapcomponent.utilities.TapControlledMapWithRefreshSupportOnScrollingAndZoom
+    android:id="@+id/mapview"
+    android:layout_below="@+id/animateToDefaultLocation"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clickable="true"
+	android:apiKey="07gqKYuV6feglGVMHSFRXaD3GT1osbyfkmFDDQg" />
+
+</RelativeLayout>
+
