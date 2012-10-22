@@ -383,7 +383,7 @@ public class Utility {
 	 *            - Bundle object
 	 * @return - url string
 	 */
-	public static String encodeUrl(Bundle parameters) {
+	private static String encodeUrl(Bundle parameters) {
 		if (parameters == null) {
 			return "";
 		}
@@ -416,7 +416,7 @@ public class Utility {
 	 * @return - image representation in ByteArray form
 	 * @throws IOException
 	 */
-	public static byte[] scaleImage(Context context, Uri photoUri)
+	private static byte[] scaleImage(Context context, Uri photoUri)
 			throws IOException {
 		InputStream is = context.getContentResolver().openInputStream(photoUri);
 		BitmapFactory.Options dbo = new BitmapFactory.Options();
@@ -486,7 +486,7 @@ public class Utility {
 	 *            - photo Uri
 	 * @return integer value of orientation
 	 */
-	public static int getOrientation(Context context, Uri photoUri) {
+	private static int getOrientation(Context context, Uri photoUri) {
 		/* it's on the external media. */
 		Cursor cursor = context.getContentResolver().query(photoUri,
 				new String[] { MediaStore.Images.ImageColumns.ORIENTATION },
