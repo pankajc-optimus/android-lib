@@ -1,0 +1,12 @@
+<resources>
+
+    <string name="app_name">ChartDemo</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_chart_demo">ChartDemo</string>
+    <string name="q1">first quarter</string>
+    <string name="q2">2nd quarter</string>
+    <string name="q3">3rd quarter</string>
+    <string name="title_activity_bar_chart">BarChart</string>
+
+</resources>
